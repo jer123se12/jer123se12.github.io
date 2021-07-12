@@ -7,16 +7,6 @@ let sm;
 let sh
 let done=false;
 let set=false;
-let imgs=['','','11','09','','09','13','50d','01',]
-function app(){
-  if (done){
-    print(rv.weather[0])
-  print(Math.floor(rv.weather.id/100));
-  document.getElementById('weather').src='http://openweathermap.org/img/wn/'.concat(rv.weather[0].icon).concat('@2x.png')  ;
-  document.getElementById('desc').innerHTML=rv.weather[0].description  ;
-  console.log('did this')
-  }
-}
 function setup() {
   
   windowResized()
@@ -26,17 +16,6 @@ function setup() {
   mo=min(innerWidth,innerHeight)-50
   linewidth=(mo/2)/3
   let colrs=["#0c090d","#e01a4f","#f15946","#f9c22e","#53b3cb"]
-  let requestURL = 'http://api.openweathermap.org/data/2.5/weather?q=singapore&appid=95de894e0579d0fcb55bbc6bc6fbe871&units=metric';
-  let request = new XMLHttpRequest();
-  request.open('GET', requestURL);
-  request.responseType = 'json';
-  
-  request.send();
-  request.onload = function() {
-    rv = request.response;
-    done=true
-    app()
-  }
   set=true
   
   
@@ -88,15 +67,6 @@ function draw() {
 
   drawtime(h,m,s)
   
-  
-  
-  if (done){
-    textSize(innerWidth/30);
-    textStyle(NORMAL);
-    let temp=round(rv.main.temp*10)/10
-    textAlign(CENTER);
-    text(String(temp)+'°C', cw, ch);
-  }
   
   // let c = color(255, 204, 0);
   // fill(c);
