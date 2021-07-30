@@ -15,6 +15,7 @@ ul {
     background-color: hsl(239, 89%, 22%);
     box-shadow: 0px 1px 20px;
   }
+  
   li {
     display: inline;
     float: right;
