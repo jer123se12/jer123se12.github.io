@@ -66,16 +66,20 @@ function draw(){
     var ctx = canvas.getContext("2d");
     ctx.canvas.width  =innerWidth;
     ctx.canvas.height = innerHeight;
+    last=0
+    var x=0
+    var y=0
     var s=10
     var arr = Array(Math.floor((innerHeight/s)+2)).fill().map(() => Array(Math.floor((innerWidth/s)+2)).fill().map(() => 1));
-    last=0
     var ps=[]
     ps=[[Math.floor(Math.random()*arr.length),Math.floor( Math.random()*arr[0].length)]]
     for (var i=0;i<Math.floor(Math.random()*arr.length)+10;i++){
         ps.push([Math.floor(Math.random()*arr[0].length),Math.floor( Math.random()*arr.length)])
     }
-    var x=0
-    var y=0
+    var directions=[]
+    for (var i=0;i<ps.length;i++){
+        directions.push([Math.floor((Math.random()-0.5)*30)/10,Math.floor((Math.random()-0.5)*30)/10])
+    }
     document.addEventListener("click", addpos);
     window.requestAnimationFrame(gameLoop);
     function addpos(event){
@@ -88,29 +92,40 @@ function draw(){
     }
     function gameLoop(ts){
         // console.log(ts);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+        if (last != Math.floor(ts/50)){
+            last=Math.floor(ts/50)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#000000";
         ctx.fillRect(0,0,canvas.width, canvas.height)
 
-        if (last != Math.floor(ts/50)){
-        last=Math.floor(ts/50)
         arr=generation(ps,arr)
-        }
+        
         for (var i=0;i<arr.length;i++){
             for (var j=0;j<arr[i].length;j++){
                 if (arr[i][j]>0){
                 ctx.fillStyle = `rgb(
-                    ${Math.floor(arr[i][j]*255)},
-                    ${Math.floor(arr[i][j]*255)},
-                    ${Math.floor(arr[i][j]*255)})`;
+                    ${/*Math.floor(arr[i][j]*255)*/ 50},
+                    ${Math.floor(arr[i][j]*200)},
+                    ${200})`;
                 ctx.fillRect((j-1)*s,(i-1)*s,s,s)
             }
             }
         }
+        for (var i=0;i<directions.length;i++){
+            ps[i]=[ps[i][0]+directions[i][0],ps[i][1]+directions[i][1]]
+            if (ps[i][0]-2<0 || ps[i][0]+2>arr[0].length){
+                directions[i][0]=directions[i][0]*-1
+            }
+            if (ps[i][1]-2<0 || ps[i][1]+2>arr.length){
+                directions[i][1]=directions[i][1]*-1
+            }
+            
+        }
 
 
-
-        
+    }        
         window.requestAnimationFrame(gameLoop);
     }
 }
@@ -149,7 +164,7 @@ function generation(points,l){
             
             }    
             }
-            l2[i][j]=m
+            l2[i][j]=(m>0)? m:0.1
         }
     }
 
