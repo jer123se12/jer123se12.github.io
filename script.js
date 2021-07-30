@@ -105,10 +105,10 @@ function draw(){
         for (var i=0;i<arr.length;i++){
             for (var j=0;j<arr[i].length;j++){
                 if (arr[i][j]>0){
-                ctx.fillStyle = `rgb(
-                    ${/*Math.floor(arr[i][j]*255)*/ 50},
-                    ${Math.floor(arr[i][j]*200)},
-                    ${200})`;
+                ctx.fillStyle = `hsl(
+                    ${/*Math.floor(arr[i][j]*255)*/ 239},
+                    ${100-Math.floor(arr[i][j]*100) }%,
+                    ${10+Math.floor(arr[i][j]*51)}%)`;
                 ctx.fillRect((j-1)*s,(i-1)*s,s,s)
             }
             }
