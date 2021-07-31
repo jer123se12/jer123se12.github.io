@@ -15,7 +15,48 @@ ul {
     background-color: hsl(239, 89%, 22%);
     box-shadow: 0px 1px 20px;
   }
-  
+  #titl{
+    width:fit-content;
+    font-family: "Lucida Console", "Courier New", monospace;
+      color: hsl(0, 0%, 100%);
+      margin: 30vh 5vw 0.5vh ;
+       font-size: 3rem; 
+       overflow: hidden;
+       border-right: .15em solid rgb(255, 255, 255);
+       white-space: nowrap;
+       animation: 
+      typing 1.5s steps(16, end),
+      blink-caret .7s step-end 3;
+      border-color: transparent;
+
+  }
+  #subtitl{
+    color: hsl(238, 100%, 83%);
+    width:0;
+    font-family: "Lucida Console", "Courier New", monospace;
+    margin: 0vh 5vw 50vh ;
+    border-right: .15em solid rgb(255, 255, 255);
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 
+      typing 1.5s steps(16, end),
+      blink-caret .7s step-end 3;
+      animation-delay: 2.1s;
+      border-color: transparent;
+      animation-fill-mode: forwards;
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 16ch }
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% {  border-color: hsl(0, 0%, 100%)}
+  }
+  p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: hsl(80, 100%, 22%)
+  }
   li {
     display: inline;
     float: right;
@@ -32,7 +73,7 @@ ul {
   
   /* Change the link color on hover */
   li a:hover {
-    background-color: #555;
+    background-color: hsl(239, 28%, 45%);
     color: white;
   }
   .active {
