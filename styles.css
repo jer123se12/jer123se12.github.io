@@ -83,6 +83,7 @@ ul {
     display: inline;
     float: right;
     transition: all 0.5s;
+    text-align: center;
   }
   li a {
     height:1rem;
