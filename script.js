@@ -1,7 +1,7 @@
 let did=0
 var running=true
 function load(){
-    if (window.innerWidth>500){
+    if (window.innerWidth>600){
         desktop()
     }else{
         mobile()
@@ -19,6 +19,7 @@ function mobile(){
     }
     
     document.getElementById("mm").style.display="block"
+    document.getElementById("mm").style.float="right"
 }
 function show(){
     // console.log("hit")
