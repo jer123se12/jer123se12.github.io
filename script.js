@@ -107,8 +107,8 @@ function draw(){
                 if (arr[i][j]>0){
                 ctx.fillStyle = `hsl(
                     ${/*Math.floor(arr[i][j]*255)*/ 239},
-                    ${100-Math.floor(arr[i][j]*100) }%,
-                    ${10+Math.floor(arr[i][j]*51)}%)`;
+                    ${(100)-Math.floor(arr[i][j]*(10*s)) }%,
+                    ${(40)+Math.floor(arr[i][j]*2.1*s)}%)`;
                 ctx.fillRect((j-1)*s,(i-1)*s,s,s)
             }
             }
@@ -156,15 +156,15 @@ function generation(points,l){
         for (var j=0;j<l[i].length;j++){
             m=1
             if (points.length>1){
-            var m=Math.floor((Math.sqrt(((points[0][0]-j)**2)+((points[0][1]-i)**2))*10))/500
+            var m=((Math.sqrt(((points[0][0]-j)**2)+((points[0][1]-i)**2))*10))/500
             for (var p=0;p<points.length;p++){
-                distance=Math.floor((Math.sqrt(((points[p][0]-j)**2)+((points[p][1]-i)**2))*10))/500
+                distance=((Math.sqrt(((points[p][0]-j)**2)+((points[p][1]-i)**2))*10))/500
 
                  m=(distance<m)?distance:m
             
             }    
             }
-            l2[i][j]=(m>0)? m:0.1
+            l2[i][j]=(m>0)? m:0.0000001
         }
     }
 
