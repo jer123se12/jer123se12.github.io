@@ -80,16 +80,16 @@ function draw(){
     for (var i=0;i<ps.length;i++){
         directions.push([Math.floor((Math.random()-0.5)*30)/10,Math.floor((Math.random()-0.5)*30)/10])
     }
-    document.addEventListener("click", addpos);
+    // document.addEventListener("click", addpos);
     window.requestAnimationFrame(gameLoop);
-    function addpos(event){
-        // arr[Math.floor(event.clientY/s)][Math.floor(event.clientX/s)]=1
-        // console.log(arr)
-        x=Math.floor(event.clientX/s)
-        y=Math.floor(event.clientY/s)
-        ps.push([x,y])
+    // function addpos(event){
+    //     // arr[Math.floor(event.clientY/s)][Math.floor(event.clientX/s)]=1
+    //     // console.log(arr)
+    //     x=Math.floor(event.clientX/s)
+    //     y=Math.floor(event.clientY/s)
+    //     ps.push([x,y])
 
-    }
+    // }
     function gameLoop(ts){
         // console.log(ts);
 
