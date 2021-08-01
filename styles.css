@@ -91,12 +91,13 @@ ul {
     padding: 1rem;
     text-decoration: none;
     transition: all 0.5s;
+    width: 5rem;
   }
   
-  /* Change the link color on hover */
   li a:hover {
     background-color: hsl(239, 28%, 45%);
     color: white;
+    width: 6rem;
   }
   .active {
     background-color: #04AA6D;
