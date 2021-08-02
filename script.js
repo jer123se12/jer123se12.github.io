@@ -98,7 +98,7 @@ function draw(){
         if (last != Math.floor(ts/50)){
             last=Math.floor(ts/50)
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = "hsl(239, 100%, 17%)";
         ctx.fillRect(0,0,canvas.width, canvas.height)
 
         arr=generation(ps,arr)
@@ -110,7 +110,11 @@ function draw(){
                     ${/*Math.floor(arr[i][j]*255)*/ 239},
                     ${(100)-Math.floor(arr[i][j]*(10*s)) }%,
                     ${(40)+Math.floor(arr[i][j]*2.1*s)}%)`;
-                ctx.fillRect((j-1)*s,(i-1)*s,s,s)
+                // ctx.fillRect((j-1)*s,(i-1)*s,s,s)
+                ctx.beginPath()
+                ctx.arc((j-1)*s, (i-1)*s, s/2, 0, 2 * Math.PI, false);
+                ctx.fill()
+                ctx.closePath();
             }
             }
         }
