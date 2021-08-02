@@ -4,15 +4,17 @@
     transition: all 0.5s;
 }
 .box{
-  
+  display: flex;
+  height: fit-content;
   padding: 1rem;
   background-color:hsl(239, 100%, 17%);
   text-align: left;
   border-radius: 20px;
   border: 2px solid;
   border-color: hsl(239, 20%, 70%);
-  
+  overflow: auto;
 }
+
 .divider{
   position: -webkit-sticky;
   position: sticky;
@@ -55,7 +57,7 @@ ul {
     color: hsl(238, 100%, 83%);
     width:0;
     font-family: "Lucida Console", "Courier New", monospace;
-    margin: 0vh 5vw 60vh ;
+    margin: 0vh 5vw 50vh ;
     border-right: .15em solid rgb(255, 255, 255);
     overflow: hidden;
     white-space: nowrap;

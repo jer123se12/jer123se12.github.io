@@ -1,6 +1,8 @@
 let did=0
+let dob=new Date(2006,03,28)
 var running=true
 function load(){
+    document.getElementById("school").innerHTML="School of Science and Technology Singapore"
     if (window.innerWidth>600){
         desktop()
     }else{
@@ -92,7 +94,8 @@ function draw(){
 
     // }
     function gameLoop(ts){
-        // console.log(ts);
+        let time=new Date();
+        document.getElementById("age").innerHTML = Math.floor((time.getTime()-dob.getTime())/315.36)/100000000
 
 
         if (last != Math.floor(ts/50)){
@@ -180,3 +183,7 @@ function topFunction() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
+
+function schre(){
+    window.location.replace("https://www.sst.edu.sg");
+}
