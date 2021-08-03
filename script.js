@@ -2,6 +2,7 @@ let did=0
 let dob=new Date(2006,03,28)
 var running=true
 function load(){
+    
     document.getElementById("school").innerHTML="School of Science and Technology Singapore"
     if (window.innerWidth>600){
         desktop()
@@ -185,5 +186,5 @@ function topFunction() {
   }
 
 function schre(){
-    window.location.replace("https://www.sst.edu.sg");
+    window.location.href("https://www.sst.edu.sg");
 }
