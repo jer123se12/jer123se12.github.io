@@ -19,6 +19,19 @@ let commands={
     'cd':cd
 }
 function load(){
+    let t=document.getElementById("terminal")
+    if (innerWidth<500){
+        console.log('yes')
+        t.style.position="absolute"
+        t.style.margin="0px"
+        t.style.right="0px"
+        t.style.top="0px"
+        t.style.left="0px"
+        t.style.width="100vw"
+        t.style.height="50vh"
+    }else{
+        t.style.margin="auto"
+    }
     prompt=document.getElementById("prompt").innerHTML;
     setInterval(() => {
         var c=document.getElementById("cursorblink")

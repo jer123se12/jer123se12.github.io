@@ -2,14 +2,17 @@ body{
     font-family: 'IBM Plex Mono';
 }
 #terminal{
-    
+    position: relative;
     margin: auto;
     background-color: #333;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    width: 75ch;
-    height: 50ch;
+    max-width: 75ch;
+    max-height: 50ch;
+    height:100%;
+    width:100%;
+    
     overflow: hidden;
 }
 #navbar{
@@ -24,21 +27,27 @@ p{
     color: #fff;
 }
 #texts{
+    left: 0px;
     word-wrap: break-word;
     padding: 0rem 1rem 1rem 1rem;
     
     color: #fff;
-    width: 100%;
+    width: 95%;
     height: 90%;
-    overflow: auto;
+    overflow: break-word;
+    
 }
 .command br{
     display:none;
 }
-#foot{
+footer{
+    height: fit-content;
+
+    z-index: -1;
     left: 0;
     position: absolute;
-    bottom: 1rem;
     text-align: center;
+    bottom: 1rem;
     width: 100%;
+    vertical-align: bottom;
 }
