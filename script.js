@@ -2,11 +2,13 @@
 let carat="█"
 let prompt;
 var currentdirectory=[]
+var timer;
+let res;
 let filesystem={
     "skills" : {
-                "proficient.txt" : "proficient.txt",
-                "learning.txt" : "learning.txt",
-                "want_to_learn.txt":"want_to_learn.txt"
+                "proficient.txt" : "proficient.html",
+                "learning.txt" : "learning.html",
+                "want_to_learn.txt":"want_to_learn.html"
                 
                 },
     "projects":{
@@ -16,9 +18,12 @@ let filesystem={
 let commands={
     'ls':lis,
     'help':h,
-    'cd':cd
+    'cd':cd,
+    'cat':ca
 }
 function load(){
+    console.log(window.location.href)
+    clearInterval(timer)
     let t=document.getElementById("terminal")
     if (innerWidth<500){
         console.log('yes')
@@ -30,10 +35,12 @@ function load(){
         t.style.width="100vw"
         t.style.height="50vh"
     }else{
+        t.style.width="100%"
+        t.style.height="90%"
         t.style.margin="auto"
     }
     prompt=document.getElementById("prompt").innerHTML;
-    setInterval(() => {
+    timer=setInterval(() => {
         var c=document.getElementById("cursorblink")
         if (c.innerHTML==carat){
             c.innerHTML=""
@@ -49,7 +56,7 @@ function runcommand(){
     let command=t[t.length-1].innerHTML.replace(/[<]br[^>]*[>]/gi,"");
     var output="<span style='color:red;'>OOP command not found</span>"
     for (var key in commands){
-        console.log(command.split(' ')[0])
+        
         if (command.split(' ')[0]==key){
             output=commands[key](command.substring(key.length+1))
         }
@@ -59,7 +66,7 @@ function runcommand(){
 
 
 
-    
+    console.log(output)
     document.getElementById("history").innerHTML=document.getElementById("history").innerHTML.concat('<br>',output,(output.length>0)? '<br>' :'' , prompt)
     document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
     var dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
@@ -89,15 +96,18 @@ function h(x){
     return  final
 }
 function cd(x){
+    x=x.split('/')
+    return cd2(x)
+}
+function cd2(y){
     var current=filesystem
     for (var i=0;i<currentdirectory.length;i++){
         current=filesystem[currentdirectory[i]]
-        
     }
 
-    x = x.replace(/[<]br[^>]*[>]/gi,"");
-    console.log(x in current)
-    if (x=='..'){
+    let x = y.shift().replace(/[<]br[^>]*[>]/gi,"");
+    if (x=='.'){}
+    else if (x=='..'){
         if (currentdirectory.length >0){
             currentdirectory.pop()
         }
@@ -105,7 +115,7 @@ function cd(x){
         if (x in current){
             if (current[x].constructor == Object){
                 currentdirectory.push(x)
-                console.log(currentdirectory)
+
             }else{
                 return "not dir"
             }
@@ -114,5 +124,26 @@ function cd(x){
             return "not in"
         }
     }
+    if (y.length>0){
+        return cd2(y)
+    }
     return ''
+}
+function ca(x){
+    var current=filesystem
+    for (var i=0;i<currentdirectory.length;i++){
+        current=filesystem[currentdirectory[i]]
+    }
+    if (x in current){
+        let d=currentdirectory.join('/')
+        res=''
+        console.log(window.location.href.concat("root/",d,'/',current[x]))
+        fetch(window.location.href.concat("root/",d))
+  .then(response => response.text())
+  .then((data) => {
+    console.log(data)
+  })
+    }
+    return res
+   
 }
