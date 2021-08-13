@@ -4,7 +4,12 @@ let prompt;
 var currentdirectory=[]
 var timer;
 let res;
+let responset;
+let done;
+let history=[];
+let hi=0;
 let filesystem={
+    "aboutme.txt":"aboutme.html",
     "skills" : {
                 "proficient.txt" : "proficient.html",
                 "learning.txt" : "learning.html",
@@ -12,7 +17,7 @@ let filesystem={
                 
                 },
     "projects":{
-                "this.txt":"this website"
+                "this.txt":"this_website.html"
                 }
 }
 let commands={
@@ -22,11 +27,12 @@ let commands={
     'cat':ca
 }
 function load(){
-    console.log(window.location.href)
+    document.onkeydown = checkaKey;
+
     clearInterval(timer)
     let t=document.getElementById("terminal")
     if (innerWidth<500){
-        console.log('yes')
+
         t.style.position="absolute"
         t.style.margin="0px"
         t.style.right="0px"
@@ -50,14 +56,103 @@ function load(){
     }, 800);
     document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function checkaKey(a){
+    var t=document.getElementsByClassName('command')
+    if (document.activeElement==t[t.length-1])setEndOfContenteditable(t[t.length-1]);
+    
+    var e = a || window.event;
+    e=e.keyCode;
+    if(e==38) gethistory(1);
+    if(e==40) gethistory(-1);
+}
+
+function checkkey(key){
+
+    if(key == 13) runcommand();
+    
+
+}
+
+function gethistory(a){
+    if (a>0){
+        if (hi>0){
+            var t=document.getElementsByClassName('command')
+            if (hi==history.length){
+                history.push(t[t.length-1].innerHTML)
+                
+            }
+            hi-=1
+            t[t.length-1].innerHTML=history[hi]
+            setEndOfContenteditable(t[t.length-1])
+
+            
+
+            
+        }
+    }else{
+        if (hi<history.length-1){
+            var t=document.getElementsByClassName('command')
+            
+            hi+=1
+            t[t.length-1].innerHTML=history[hi]
+            setEndOfContenteditable(t[t.length-1])
+
+            
+
+        }
+    }
+}
+//lol stolen func
+function setEndOfContenteditable(contentEditableElement)
+{
+    var range,selection;
+    if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+    {
+        range = document.createRange();//Create a range (a range is a like the selection but invisible)
+        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        selection = window.getSelection();//get the selection object (allows you to change selection)
+        selection.removeAllRanges();//remove any selections already made
+        selection.addRange(range);//make the range you have just created the visible selection
+    }
+    else if(document.selection)//IE 8 and lower
+    { 
+        range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
+        range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        range.select();//Select the range (make it the visible selection
+    }
+}
+
+
 function runcommand(){
     var t=document.getElementsByClassName('command')
     t[t.length-1].setAttribute("contenteditable", false);
-    let command=t[t.length-1].innerHTML.replace(/[<]br[^>]*[>]/gi,"");
-    var output="<span style='color:red;'>OOP command not found</span>"
+    let command=t[t.length-1].innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim();
+    var output=(command.length>0)?"<span style='color:red;'>abc: command not found: ".concat(command.split(' ')[0],"</span>"):""
     for (var key in commands){
         
         if (command.split(' ')[0]==key){
+            hi+=1
+            history=history.slice(0,hi);
+            history.push(command)
             output=commands[key](command.substring(key.length+1))
         }
 
@@ -66,7 +161,7 @@ function runcommand(){
 
 
 
-    console.log(output)
+
     document.getElementById("history").innerHTML=document.getElementById("history").innerHTML.concat('<br>',output,(output.length>0)? '<br>' :'' , prompt)
     document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
     var dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
@@ -75,27 +170,39 @@ function runcommand(){
 
 
 }
-function lis (x){
+
+//ls
+function lis(x,he=false){
+    if (he){return "Lists all files in directory"}
     var current=filesystem
     for (var i=0;i<currentdirectory.length;i++){
         current=filesystem[currentdirectory[i]]
         
     }
-    console.log(current)
+
     var final=[]
     for (var key in current){
         final.push(key)
     }
     return final.join('<br>')
 }
-function h(x){
-    var final=''
+
+//help
+function h(x,he=false){
+    if (he){return "Shows list commands"}
+    var final='<table><tr><th>Command</th><th>Desc</th></tr>'
+
     for (var keys in commands){
-        final=final.concat('\t',keys)
+        final=final.concat('<tr><td>',keys,'</td><td>',commands[keys]('',true),'</td></tr>')
     }
-    return  final
+    return  final.concat('</table>')
 }
-function cd(x){
+
+
+//cd
+function cd(x,he=false){
+    if (he){return "set current folder to folder given. Usage: cd (foldername)"}
+    if (x==""){currentdirectory=[]; return ''};
     x=x.split('/')
     return cd2(x)
 }
@@ -117,11 +224,11 @@ function cd2(y){
                 currentdirectory.push(x)
 
             }else{
-                return "not dir"
+                return "<span style='color:red;'>cd: not a directory: ".concat(x,"</span>")
             }
 
         } else{
-            return "not in"
+            return "<span style='color:red;'>cd: no such file or directory: ".concat(x,"</span>")
         }
     }
     if (y.length>0){
@@ -129,21 +236,48 @@ function cd2(y){
     }
     return ''
 }
-function ca(x){
+
+
+
+//cat
+function ca(x,he=false){
+    if (he){return "Outputs content of file. Usage: cd (filename with extension)"}
     var current=filesystem
     for (var i=0;i<currentdirectory.length;i++){
         current=filesystem[currentdirectory[i]]
     }
+    res=''
+
     if (x in current){
-        let d=currentdirectory.join('/')
-        res=''
-        console.log(window.location.href.concat("root/",d,'/',current[x]))
-        fetch(window.location.href.concat("root/",d))
-  .then(response => response.text())
-  .then((data) => {
-    console.log(data)
-  })
+        
+        if (current[x].constructor != Object){
+            let d=currentdirectory.join('/')
+            res=''
+            done=true
+            // window.location.href.concat("root/",d,'/',current[x])
+            var xhr = new XMLHttpRequest();
+            
+            xhr.open("GET", window.location.href.concat("root/",d,'/',current[x]), false);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    responset=(xhr.responseText);
+                } else {
+                    console.error(xhr.statusText);
+                }
+                }
+            };
+            xhr.send(null); 
+            res=responset;
+            return res
+        }else{
+            return "<span style='color:red;'>cat: not a file: ".concat(x,"</span>")
+        }
+    }else{
+        return "<span style='color:red;'>cat: no such file or directory: ".concat(x,"</span>")
     }
-    return res
+
+    
    
 }
+
