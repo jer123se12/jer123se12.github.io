@@ -241,7 +241,7 @@ function cd2(y){
 
 //cat
 function ca(x,he=false){
-    if (he){return "Outputs content of file. Usage: cd (filename with extension)"}
+    if (he){return "Outputs content of file. Usage: cat (filename with extension)"}
     var current=filesystem
     for (var i=0;i<currentdirectory.length;i++){
         current=filesystem[currentdirectory[i]]
