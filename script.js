@@ -24,7 +24,8 @@ let commands={
     'ls':lis,
     'help':h,
     'cd':cd,
-    'cat':ca
+    'cat':ca,
+    'clear':clea
 }
 function load(){
     document.onkeydown = checkaKey;
@@ -40,7 +41,9 @@ function load(){
         t.style.left="0px"
         t.style.width="100vw"
         t.style.height="50vh"
+        t.style.borderRadius="0px"
     }else{
+        t.style.borderRadius="10px"
         t.style.width="100%"
         t.style.height="90%"
         t.style.margin="auto"
@@ -163,9 +166,12 @@ function runcommand(){
 
 
     document.getElementById("history").innerHTML=document.getElementById("history").innerHTML.concat('<br>',output,(output.length>0)? '<br>' :'' , prompt)
-    document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
+    let newprompt=document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1]
+    newprompt.focus();
     var dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
     dir.innerHTML=(currentdirectory.length>0) ? currentdirectory[currentdirectory.length-1]:"root"
+    
+
     
 
 
@@ -254,10 +260,10 @@ function ca(x,he=false){
             let d=currentdirectory.join('/')
             res=''
             done=true
-            // window.location.href.concat("root/",d,'/',current[x])
-            var xhr = new XMLHttpRequest();
+            let path="".concat("/root/",d,(d!="")?'/':'',current[x])
             
-            xhr.open("GET", window.location.href.concat("root/",d,'/',current[x]), false);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", path, false);
             xhr.onload = function (e) {
                 if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
@@ -281,3 +287,9 @@ function ca(x,he=false){
    
 }
 
+//clear
+function clea(x,h=false){
+    if (h){return "Clears screen"}
+    document.getElementById("history").innerHTML=""
+    return ""
+}

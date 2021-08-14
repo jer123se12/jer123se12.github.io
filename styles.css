@@ -6,6 +6,7 @@ body{
     z-index: 1000;
     position: relative;
     margin: auto;
+
     background-color: #333;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -19,6 +20,7 @@ body{
 }
 #navbar{
     padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
     top: 0;
     left: 0;
