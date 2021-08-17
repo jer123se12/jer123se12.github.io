@@ -27,6 +27,10 @@ let commands={
     'cat':ca,
     'clear':clea
 }
+let ac={
+    'cat':undefined,
+    'cd':undefined
+}
 function load(){
     document.onkeydown = checkaKey;
 
@@ -59,6 +63,13 @@ function load(){
     }, 800);
     document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
 }
+function cwd(){
+    var current=filesystem
+    for (var i=0;i<currentdirectory.length;i++){
+        current=filesystem[currentdirectory[i]]
+    }
+    return current
+}
 
 
 
@@ -82,8 +93,9 @@ function checkaKey(a){
     
     var e = a || window.event;
     e=e.keyCode;
-    if(e==38) gethistory(1);
-    if(e==40) gethistory(-1);
+    if(e==38) {a.preventDefault();gethistory(1);}
+    if(e==40) {a.preventDefault();gethistory(-1);}
+    if(e==9){a.preventDefault();autocomplete();}
 }
 
 function checkkey(key){
@@ -92,7 +104,32 @@ function checkkey(key){
     
 
 }
-
+function autocomplete(){
+    console.log("hello")
+    var t=document.getElementsByClassName('command')
+    var current=t[t.length-1]
+    console.log(current)
+    var cd=cwd()
+    var cmd=current.innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim().split(" ");
+    if (cmd.length>0){
+        if (cmd[0] in ac){
+            console.log(cmd)
+            var possible=[]
+            for (const fn in cd){
+                if (fn.includes(cmd[cmd.length-1])){
+                    possible.push(fn)
+                }
+            }
+            if (possible.length==1){
+                cmd.pop()
+                current.innerHTML=cmd.concat(possible).join(" ");
+                current.focus();
+                setEndOfContenteditable(current)
+                
+            }
+        }
+    }
+}
 function gethistory(a){
     if (a>0){
         if (hi>0){
@@ -104,10 +141,6 @@ function gethistory(a){
             hi-=1
             t[t.length-1].innerHTML=history[hi]
             setEndOfContenteditable(t[t.length-1])
-
-            
-
-            
         }
     }else{
         if (hi<history.length-1){
@@ -180,11 +213,8 @@ function runcommand(){
 //ls
 function lis(x,he=false){
     if (he){return "Lists all files in directory"}
-    var current=filesystem
-    for (var i=0;i<currentdirectory.length;i++){
-        current=filesystem[currentdirectory[i]]
-        
-    }
+    var current=cwd()
+    
 
     var final=[]
     for (var key in current){
@@ -213,11 +243,8 @@ function cd(x,he=false){
     return cd2(x)
 }
 function cd2(y){
-    var current=filesystem
-    for (var i=0;i<currentdirectory.length;i++){
-        current=filesystem[currentdirectory[i]]
-    }
-
+    
+    var current=cwd()
     let x = y.shift().replace(/[<]br[^>]*[>]/gi,"");
     if (x=='.'){}
     else if (x=='..'){
@@ -248,12 +275,8 @@ function cd2(y){
 //cat
 function ca(x,he=false){
     if (he){return "Outputs content of file. Usage: cat (filename with extension)"}
-    var current=filesystem
-    for (var i=0;i<currentdirectory.length;i++){
-        current=filesystem[currentdirectory[i]]
-    }
+    var current=cwd()
     res=''
-
     if (x in current){
         
         if (current[x].constructor != Object){
