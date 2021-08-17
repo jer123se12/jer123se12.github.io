@@ -218,7 +218,9 @@ function lis(x,he=false){
 
     var final=[]
     for (var key in current){
-        final.push(key)
+        if (current[key].constructor == Object){
+            final.push('<span style="color:white">'.concat(key,'</span>'))
+        }else{final.push(key)};
     }
     return final.join('<br>')
 }
