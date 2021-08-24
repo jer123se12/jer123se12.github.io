@@ -20,6 +20,7 @@ let filesystem={
                 "this.txt":"this_website.html"
                 }
 }
+//list of commands avaliable
 let commands={
     'ls':lis,
     'help':h,
@@ -27,6 +28,7 @@ let commands={
     'cat':ca,
     'clear':clea
 }
+//if autocomplet is wanted
 let ac={
     'cat':undefined,
     'cd':undefined
