@@ -17,7 +17,8 @@ let filesystem={
                 
                 },
     "projects":{
-                "this.txt":"this_website.html"
+                "this.txt":"this_website.html",
+                "Tetris.txt":"TeTrIs.html"
                 }
 }
 //list of commands avaliable
