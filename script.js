@@ -72,23 +72,6 @@ function cwd(){
     }
     return current
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function checkaKey(a){
     var t=document.getElementsByClassName('command')
     if (document.activeElement==t[t.length-1])setEndOfContenteditable(t[t.length-1]);
@@ -201,12 +184,14 @@ function runcommand(){
 
 
     document.getElementById("history").innerHTML=document.getElementById("history").innerHTML.concat('<br>',output,(output.length>0)? '<br>' :'' , prompt)
+    
     let newprompt=document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1]
     newprompt.focus();
     var dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
     dir.innerHTML=(currentdirectory.length>0) ? currentdirectory[currentdirectory.length-1]:"root"
-    
-
+   function setscroll(){ 
+    document.getElementById("texts").scrollTop=10000000}
+      setTimeout(setscroll,100)
     
 
 
