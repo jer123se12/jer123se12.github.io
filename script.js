@@ -10,6 +10,7 @@ let history=[];
 let hi=0;
 let filesystem={
     "aboutme.txt":"aboutme.html",
+    "education.txt":"education.html",
     "skills" : {
                 "proficient.txt" : "proficient.html",
                 "learning.txt" : "learning.html",
