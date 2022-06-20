@@ -18,7 +18,10 @@ display: block;
   width: auto;
   height: auto;}
 </style>
-<script>
+<img src="empty.gif" onload="educate();this.parentNode.removeChild(this);" >
+
+<script onload="educate()">
+function educate(){
 let template=(name,img,desc,ystart,yend)=>{return `
 <div class="item">
 <img src="${img}" alt="IMG DID NOT LOAD PLEASE SEND HELP">
@@ -48,5 +51,5 @@ for(let i;i<data.length-1;i++){
 }
 
 text+=template(data[data.length-1][0],data[data.length-1][1],data[data.length-1][2],data[data.length-1][3],data[data.length-1][4])
-ele.innerHTML =text
+ele.innerHTML =text}
 </script>
