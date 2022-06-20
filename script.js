@@ -103,12 +103,16 @@ function autocomplete(){
             console.log(cmd)
             var possible=[]
             for (const fn in cd){
-                if (fn.includes(cmd[cmd.length-1])){
+                if (cmd.length>1 && fn.includes(cmd[cmd.length-1])){
+		console.log(fn)
+		    
                     possible.push(fn)
-                }
+                }else if(cmd.length==1){possible.push(fn)}
             }
             if (possible.length==1){
-                cmd.pop()
+		if (cmd.length>1){
+                cmd.pop()}
+		console.log(possible)
                 current.innerHTML=cmd.concat(possible).join(" ");
                 current.focus();
                 setEndOfContenteditable(current)
