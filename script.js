@@ -266,7 +266,7 @@ function cd2(y){
 //cat
 function ca(x,he=false){
     if (he){return "Outputs content of file. Usage: cat (filename with extension)"}
-    var current=cwd()
+    let current=cwd()
     res=''
     if (x in current){
         
@@ -274,7 +274,9 @@ function ca(x,he=false){
             let d=currentdirectory.join('/')
             res=''
             done=true
-            let path="".concat("/root/",d,(d!="")?'/':'',current[x])
+	    let loc=(window.location.pathname)
+	    let path=loc.substring(0, loc.lastIndexOf('/'));
+            path+="".concat("/root/",d,(d!="")?'/':'',current[x])
             
             var xhr = new XMLHttpRequest();
             xhr.open("GET", path, false);
@@ -283,10 +285,12 @@ function ca(x,he=false){
                 if (xhr.status === 200) {
                     responset=(xhr.responseText);
                 } else {
+			responset="<span style='color:red'> Error in requesting file</span>"
                     console.error(xhr.statusText);
                 }
                 }
             };
+	    xhr.setRequestHeader("Access-Control-Allow-Origin","*")
             xhr.send(null); 
             res=responset;
             return res
