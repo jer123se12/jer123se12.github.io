@@ -1,8 +1,8 @@
 "use strict"
 let carat="█"
 let prompt;
-var currentdirectory=[]
-var timer;
+let currentdirectory=[]
+let timer;
 let res;
 let responset;
 let done;
@@ -20,7 +20,19 @@ let filesystem={
     "projects":{
                 "this.txt":"this_website.html",
                 "Tetris.txt":"TeTrIs.html"
-                }
+                },
+    "certificates":{
+        "cybersecurity":{
+		"Hack-n-Flag2021.png":"Hack-n-Flag2021.html",
+		"YCEP-CTF2021.png":"YCEP-CTF2021.html"
+	},
+	"programming":{
+		"NSC-CTF2021.png":"NSC-CTF2021.html"
+	},
+	"science":{
+		"ISIF2021.png":"ISIF2021.html"
+	}
+    }
 }
 //list of commands avaliable
 let commands={
@@ -58,7 +70,7 @@ function load(){
     }
     prompt=document.getElementById("prompt").innerHTML;
     timer=setInterval(() => {
-        var c=document.getElementById("cursorblink")
+        let c=document.getElementById("cursorblink")
         if (c.innerHTML==carat){
             c.innerHTML=""
         }else{
@@ -68,17 +80,19 @@ function load(){
     document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
 }
 function cwd(){
-    var current=filesystem
-    for (var i=0;i<currentdirectory.length;i++){
-        current=filesystem[currentdirectory[i]]
+    let current=filesystem
+    console.log(currentdirectory)
+    for (let i=0;i<currentdirectory.length;i++){
+
+        current=current[currentdirectory[i]]
     }
     return current
 }
 function checkaKey(a){
-    var t=document.getElementsByClassName('command')
+    let t=document.getElementsByClassName('command')
     if (document.activeElement==t[t.length-1])setEndOfContenteditable(t[t.length-1]);
     
-    var e = a || window.event;
+    let e = a || window.event;
     e=e.keyCode;
     if(e==38) {a.preventDefault();gethistory(1);}
     if(e==40) {a.preventDefault();gethistory(-1);}
@@ -93,15 +107,15 @@ function checkkey(key){
 }
 function autocomplete(){
     console.log("hello")
-    var t=document.getElementsByClassName('command')
-    var current=t[t.length-1]
+    let t=document.getElementsByClassName('command')
+    let current=t[t.length-1]
     console.log(current)
-    var cd=cwd()
-    var cmd=current.innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim().split(" ");
+    let cd=cwd()
+    let cmd=current.innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim().split(" ");
     if (cmd.length>0){
         if (cmd[0] in ac){
             console.log(cmd)
-            var possible=[]
+            let possible=[]
             for (const fn in cd){
                 if (cmd.length>1 && fn.includes(cmd[cmd.length-1])){
 		console.log(fn)
@@ -124,7 +138,7 @@ function autocomplete(){
 function gethistory(a){
     if (a>0){
         if (hi>0){
-            var t=document.getElementsByClassName('command')
+            let t=document.getElementsByClassName('command')
             if (hi==history.length){
                 history.push(t[t.length-1].innerHTML)
                 
@@ -135,7 +149,7 @@ function gethistory(a){
         }
     }else{
         if (hi<history.length-1){
-            var t=document.getElementsByClassName('command')
+            let t=document.getElementsByClassName('command')
             
             hi+=1
             t[t.length-1].innerHTML=history[hi]
@@ -149,7 +163,7 @@ function gethistory(a){
 //lol stolen func
 function setEndOfContenteditable(contentEditableElement)
 {
-    var range,selection;
+    let range,selection;
     if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
     {
         range = document.createRange();//Create a range (a range is a like the selection but invisible)
@@ -170,11 +184,11 @@ function setEndOfContenteditable(contentEditableElement)
 
 
 function runcommand(){
-    var t=document.getElementsByClassName('command')
+    let t=document.getElementsByClassName('command')
     t[t.length-1].setAttribute("contenteditable", false);
     let command=t[t.length-1].innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim();
-    var output=(command.length>0)?"<span style='color:red;'>abc: command not found: ".concat(command.split(' ')[0],"</span>"):""
-    for (var key in commands){
+    let output=(command.length>0)?"<span style='color:red;'>abc: command not found: ".concat(command.split(' ')[0],"</span>"):""
+    for (let key in commands){
         
         if (command.split(' ')[0]==key){
             hi+=1
@@ -193,7 +207,7 @@ function runcommand(){
     
     let newprompt=document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1]
     newprompt.focus();
-    var dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
+    let dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
     dir.innerHTML=(currentdirectory.length>0) ? currentdirectory[currentdirectory.length-1]:"root"
    function setscroll(){ 
     document.getElementById("texts").scrollTop=10000000}
@@ -206,11 +220,13 @@ function runcommand(){
 //ls
 function lis(x,he=false){
     if (he){return "Lists all files in directory"}
-    var current=cwd()
+    let current=cwd()
     
 
-    var final=[]
-    for (var key in current){
+    console.log(current)
+    let final=[]
+    for (let key in current){
+	    console.log(key)
         if (current[key].constructor == Object){
             final.push('<span style="color:white">'.concat(key,'</span>'))
         }else{final.push(key)};
@@ -221,9 +237,9 @@ function lis(x,he=false){
 //help
 function h(x,he=false){
     if (he){return "Shows list commands"}
-    var final='<table><tr><th>Command</th><th>Desc</th></tr>'
+    let final='<table><tr><th>Command</th><th>Desc</th></tr>'
 
-    for (var keys in commands){
+    for (let keys in commands){
         final=final.concat('<tr><td>',keys,'</td><td>',commands[keys]('',true),'</td></tr>')
     }
     return  final.concat('</table>')
@@ -239,7 +255,7 @@ function cd(x,he=false){
 }
 function cd2(y){
     
-    var current=cwd()
+    let current=cwd()
     let x = y.shift().replace(/[<]br[^>]*[>]/gi,"");
     if (x=='.'){}
     else if (x=='..'){
@@ -282,7 +298,7 @@ function ca(x,he=false){
 	    let path=loc.substring(0, loc.lastIndexOf('/'));
             path+="".concat("/root/",d,(d!="")?'/':'',current[x])
             
-            var xhr = new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
             xhr.open("GET", path, false);
             xhr.onload = function (e) {
                 if (xhr.readyState === 4) {
