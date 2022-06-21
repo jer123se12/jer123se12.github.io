@@ -63,10 +63,11 @@ function load(){
         t.style.height="50vh"
         t.style.borderRadius="0px"
     }else{
-        t.style.borderRadius="10px"
-        t.style.width="100%"
-        t.style.height="90%"
+	t.style.verticalAlign="middle"
         t.style.margin="auto"
+        t.style.borderRadius="10px"
+        t.style.width="100vw"
+        t.style.height="90vh"
     }
     prompt=document.getElementById("prompt").innerHTML;
     timer=setInterval(() => {
