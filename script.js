@@ -42,6 +42,21 @@ let commands={
     'cat':ca,
     'clear':clea
 }
+let expanded=false
+function toggleExpand(){
+    expanded = !expanded;
+    if (expanded){
+	console.log(expanded)
+        let main=document.getElementById("terminal")
+	main.style.position="absolute"
+	main.style.top="0px"
+	main.style.left="0px"
+	main.style.height="100vh"
+	main.style.width="100vw"
+    }else{
+
+    }
+}
 //if autocomplet is wanted
 let ac={
     'cat':undefined,
@@ -66,8 +81,8 @@ function load(){
 	t.style.verticalAlign="middle"
         t.style.margin="auto"
         t.style.borderRadius="10px"
-        t.style.width="100vw"
-        t.style.height="90vh"
+        t.style.width="50vw"
+        t.style.height="50vh"
     }
     prompt=document.getElementById("prompt").innerHTML;
     timer=setInterval(() => {
