@@ -20,7 +20,7 @@ let filesystem={
 }, 
 "education.md": "education.html",
 "skills": {
-	"Proficient.md": "proficient.html", "learning.md": "learning.html"}, "aboutMe.md": "aboutme.html", "certificates": {"programming": {"NSC_2021.md": "NSC2021.html"}, "science": {"ISIS_2021.md": "ISIF2021.html"}, "cybersecurity": {"hackNFlag_2021.md": "Hack-n-Flag2021.html", "YCEP_CTF_2021.md": "YCEP-CTF2021.html"}}}
+	"Proficient.md": "proficient.html", "learning.md": "learning.html"}, "aboutMe.md": "aboutme.html", "certificates": {"programming": {"NSC_2021.md": "NSC2021.html"}, "science": {"ISIF_2021.md": "ISIF2021.html"}, "cybersecurity": {"hackNFlag_2021.md": "Hack-n-Flag2021.html", "YCEP_CTF_2021.md": "YCEP-CTF2021.html"}}}
 //list of commands avaliable
 let commands={
     'ls':lis,
