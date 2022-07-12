@@ -34,7 +34,7 @@ function getstuff(directory,cwd=[],depth=0){
 			output+=`<div onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
 				<h${depth+1}>${fn}</h${depth+1}>
 				</div>`
-			output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='none'>`+
+			output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='display:none;margin-left:1rem;'>`+
 				getstuff(directory[fn],[...cwd,fn],depth+1)+
 				"</div>"
 		}
