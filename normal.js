@@ -22,16 +22,31 @@ function getstuff(directory,cwd=[],depth=0){
 	for (const fn in directory){
 		console.log(fn)
 		if (typeof directory[fn]==='string'){
+			output+=`<h${depth+1}>${fn}</h${depth+1}>`
 			output+=getfile(cwd,directory[fn])
 
 		}else{
-			output+=`<h${depth+1}>${fn}</h${depth+1}>`
-			output+=getstuff(directory[fn],[...cwd,fn],depth+1)
+			output+=`<div onclick="toggle('${fn} ${depth+1}')">
+				<h${depth+1}>${fn}</h${depth+1}>
+				</div>`
+			output+=`<div id='${fn} ${depth+1}'style='none'>`+
+				getstuff(directory[fn],[...cwd,fn],depth+1)+
+				"</div>"
 		}
 	}
 	console.log(output)
 	return output
 	
+}
+function toggle(ele){
+	if (document.getElementById(ele).style.display=="none"){
+		document.getElementById(ele).style.display='block'
+	}else{
+		document.getElementById(ele).style.display='none'
+
+	}
+
+
 }
 function getfile(currentdirectory,filename){
 	let d=currentdirectory.join('/')
