@@ -21,23 +21,18 @@ function getstuff(directory,cwd=[],depth=0){
 	console.log(directory)
 	for (const fn in directory){
 		console.log(fn)
+		output+=`<div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
+			<h${depth+1}>${fn}</h${depth+1}>
+			</div>`
+		output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='border-left: 5px solid grey;display:none;margin-left:2rem;'>`
 		if (typeof directory[fn]==='string'){
-			output+=`<div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
-				
-				<h${depth+1}>${fn}</h${depth+1}>
-				</div>`
-			output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='display:none;margin-left:1rem;'>`+
-				getfile(cwd,directory[fn])+
-				"</div>"
+			
+				output+=getfile(cwd,directory[fn])
 
 		}else{
-			output+=`<div onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
-				<h${depth+1}>${fn}</h${depth+1}>
-				</div>`
-			output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='display:none;margin-left:1rem;'>`+
-				getstuff(directory[fn],[...cwd,fn],depth+1)+
-				"</div>"
+			output+=getstuff(directory[fn],[...cwd,fn],depth+1)
 		}
+		output+="</div>"
 	}
 	console.log(output)
 	return output
