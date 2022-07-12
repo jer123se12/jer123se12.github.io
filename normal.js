@@ -12,7 +12,7 @@ let filesystem={
 "skills": {
 	"Proficient.md": "proficient.html", "learning.md": "learning.html"}, "aboutMe.md": "aboutme.html", "certificates": {"programming": {"NSC_2021.md": "NSC2021.html"}, "science": {"ISIS_2021.md": "ISIF2021.html"}, "cybersecurity": {"hackNFlag_2021.md": "Hack-n-Flag2021.html", "YCEP_CTF_2021.md": "YCEP-CTF2021.html"}}}
 function load(){
-	document.body.innerHTML=getstuff(filesystem)
+	document.body.innerHTML=getstuff({"root":filesystem})
 
 
 }
@@ -22,14 +22,19 @@ function getstuff(directory,cwd=[],depth=0){
 	for (const fn in directory){
 		console.log(fn)
 		if (typeof directory[fn]==='string'){
-			output+=`<h${depth+1}>${fn}</h${depth+1}>`
-			output+=getfile(cwd,directory[fn])
-
-		}else{
-			output+=`<div onclick="toggle('${fn} ${depth+1}')">
+			output+=`<div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
+				
 				<h${depth+1}>${fn}</h${depth+1}>
 				</div>`
-			output+=`<div id='${fn} ${depth+1}'style='none'>`+
+			output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='display:none;margin-left:1rem;'>`+
+				getfile(cwd,directory[fn])+
+				"</div>"
+
+		}else{
+			output+=`<div onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
+				<h${depth+1}>${fn}</h${depth+1}>
+				</div>`
+			output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='none'>`+
 				getstuff(directory[fn],[...cwd,fn],depth+1)+
 				"</div>"
 		}
