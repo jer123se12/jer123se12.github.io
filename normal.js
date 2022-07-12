@@ -56,6 +56,7 @@ function getfile(currentdirectory,filename){
 	let path=loc.substring(0, loc.lastIndexOf('/'));
 	path+="".concat("/root/",d,(d!="")?'/':'',filename)
 
+	console.log(path)
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", path, false);
 	xhr.onload = function (e) {
