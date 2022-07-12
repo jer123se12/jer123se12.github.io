@@ -17,6 +17,7 @@ function load(){
 
 }
 function getstuff(directory,cwd=[],depth=0){
+	console.log(cwd)
 	output=""
 	console.log(directory)
 	for (const fn in directory){
@@ -54,9 +55,10 @@ function getfile(currentdirectory,filename){
 	done=true
 	let loc=(window.location.pathname)
 	let path=loc.substring(0, loc.lastIndexOf('/'));
-	path+="".concat("/root/",d,(d!="")?'/':'',filename)
+	path+="".concat("/",d,(d!="")?'/':'',filename)
 
 	console.log(path)
+	console.log(currentdirectory)
 	let xhr = new XMLHttpRequest();
 	xhr.open("GET", path, false);
 	xhr.onload = function (e) {
