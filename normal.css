@@ -1,7 +1,19 @@
 body{
-color: #FFF;
+height:100vh;
+width:100vw;
+overflow: scroll;
+color: #fff;
 background: #333;
-font-family:"Lucida Console", monospace;
+font-family: 'IBM Plex Mono';
+display: flex;
 
+justify-content: center;
+align-items: center;
 }
+.row{display: flex;
+    justify-content: center;
+    align-items: center;}
 
+a{
+    color:greenyellow;
+}
