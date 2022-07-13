@@ -282,7 +282,8 @@ function ca(x,he=false){
                 if (xhr.status === 200) {
                     responset=(xhr.responseText);
                 } else {
-                    console.error(xhr.statusText);
+                    console.log(xhr.statusText);
+                    responset="<span style='color:red;'>Error Please contact person in charge</span>"
                 }
                 }
             };
