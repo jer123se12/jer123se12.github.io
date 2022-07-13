@@ -1,26 +1,26 @@
 "use strict"
 let carat="█"
 let prompt;
-var currentdirectory=[]
-var timer;
+let currentdirectory=[]
+let timer;
 let res;
 let responset;
 let done;
 let history=[];
 let hi=0;
 let filesystem={
-    "aboutme.txt":"aboutme.html",
-    "skills" : {
-                "proficient.txt" : "proficient.html",
-                "learning.txt" : "learning.html",
-                "want_to_learn.txt":"want_to_learn.html"
-                
-                },
-    "projects":{
-                "this.txt":"this_website.html",
-                "Tetris.txt":"TeTrIs.html"
-                }
-}
+"projects": {
+	"3d+electornics": {
+		"myKb.md": "mykeyboard.html"
+	}, "programming": {
+		"thisWebsite.md": "this_website.html",
+		"tetris.md": "TeTrIs.html",
+		"homepage.md":"homepage.html"
+	}
+}, 
+"education.md": "education.html",
+"skills": {
+	"Proficient.md": "proficient.html", "learning.md": "learning.html"}, "aboutMe.md": "aboutme.html", "certificates": {"programming": {"NSC_2021.md": "NSC2021.html"}, "science": {"ISIF_2021.md": "ISIF2021.html"}, "cybersecurity": {"hackNFlag_2021.md": "Hack-n-Flag2021.html", "YCEP_CTF_2021.md": "YCEP-CTF2021.html"}}}
 //list of commands avaliable
 let commands={
     'ls':lis,
@@ -28,6 +28,21 @@ let commands={
     'cd':cd,
     'cat':ca,
     'clear':clea
+}
+let expanded=false
+function toggleExpand(){
+    expanded = !expanded;
+    if (expanded){
+	console.log(expanded)
+        let main=document.getElementById("terminal")
+	main.style.position="absolute"
+	main.style.top="0px"
+	main.style.left="0px"
+	main.style.height="100vh"
+	main.style.width="100vw"
+    }else{
+
+    }
 }
 //if autocomplet is wanted
 let ac={
@@ -50,14 +65,15 @@ function load(){
         t.style.height="50vh"
         t.style.borderRadius="0px"
     }else{
-        t.style.borderRadius="10px"
-        t.style.width="100%"
-        t.style.height="90%"
+	t.style.verticalAlign="middle"
         t.style.margin="auto"
+        t.style.borderRadius="10px"
+        t.style.width="50vw"
+        t.style.height="50vh"
     }
     prompt=document.getElementById("prompt").innerHTML;
     timer=setInterval(() => {
-        var c=document.getElementById("cursorblink")
+        let c=document.getElementById("cursorblink")
         if (c.innerHTML==carat){
             c.innerHTML=""
         }else{
@@ -67,17 +83,19 @@ function load(){
     document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1].focus();
 }
 function cwd(){
-    var current=filesystem
-    for (var i=0;i<currentdirectory.length;i++){
-        current=filesystem[currentdirectory[i]]
+    let current=filesystem
+    console.log(currentdirectory)
+    for (let i=0;i<currentdirectory.length;i++){
+
+        current=current[currentdirectory[i]]
     }
     return current
 }
 function checkaKey(a){
-    var t=document.getElementsByClassName('command')
+    let t=document.getElementsByClassName('command')
     if (document.activeElement==t[t.length-1])setEndOfContenteditable(t[t.length-1]);
     
-    var e = a || window.event;
+    let e = a || window.event;
     e=e.keyCode;
     if(e==38) {a.preventDefault();gethistory(1);}
     if(e==40) {a.preventDefault();gethistory(-1);}
@@ -92,22 +110,26 @@ function checkkey(key){
 }
 function autocomplete(){
     console.log("hello")
-    var t=document.getElementsByClassName('command')
-    var current=t[t.length-1]
+    let t=document.getElementsByClassName('command')
+    let current=t[t.length-1]
     console.log(current)
-    var cd=cwd()
-    var cmd=current.innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim().split(" ");
+    let cd=cwd()
+    let cmd=current.innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim().split(" ");
     if (cmd.length>0){
         if (cmd[0] in ac){
             console.log(cmd)
-            var possible=[]
+            let possible=[]
             for (const fn in cd){
-                if (fn.includes(cmd[cmd.length-1])){
+                if (cmd.length>1 && fn.includes(cmd[cmd.length-1])){
+		console.log(fn)
+		    
                     possible.push(fn)
-                }
+                }else if(cmd.length==1){possible.push(fn)}
             }
             if (possible.length==1){
-                cmd.pop()
+		if (cmd.length>1){
+                cmd.pop()}
+		console.log(possible)
                 current.innerHTML=cmd.concat(possible).join(" ");
                 current.focus();
                 setEndOfContenteditable(current)
@@ -119,7 +141,7 @@ function autocomplete(){
 function gethistory(a){
     if (a>0){
         if (hi>0){
-            var t=document.getElementsByClassName('command')
+            let t=document.getElementsByClassName('command')
             if (hi==history.length){
                 history.push(t[t.length-1].innerHTML)
                 
@@ -130,7 +152,7 @@ function gethistory(a){
         }
     }else{
         if (hi<history.length-1){
-            var t=document.getElementsByClassName('command')
+            let t=document.getElementsByClassName('command')
             
             hi+=1
             t[t.length-1].innerHTML=history[hi]
@@ -144,7 +166,7 @@ function gethistory(a){
 //lol stolen func
 function setEndOfContenteditable(contentEditableElement)
 {
-    var range,selection;
+    let range,selection;
     if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
     {
         range = document.createRange();//Create a range (a range is a like the selection but invisible)
@@ -165,11 +187,11 @@ function setEndOfContenteditable(contentEditableElement)
 
 
 function runcommand(){
-    var t=document.getElementsByClassName('command')
+    let t=document.getElementsByClassName('command')
     t[t.length-1].setAttribute("contenteditable", false);
     let command=t[t.length-1].innerHTML.replace(/[<]br[^>]*[>]/gi,"").replace(/&nbsp;/g,' ').trim();
-    var output=(command.length>0)?"<span style='color:red;'>abc: command not found: ".concat(command.split(' ')[0],"</span>"):""
-    for (var key in commands){
+    let output=(command.length>0)?"<span style='color:red;'>abc: command not found: ".concat(command.split(' ')[0],"</span>"):""
+    for (let key in commands){
         
         if (command.split(' ')[0]==key){
             hi+=1
@@ -188,7 +210,7 @@ function runcommand(){
     
     let newprompt=document.getElementsByClassName('command')[document.getElementsByClassName('command').length-1]
     newprompt.focus();
-    var dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
+    let dir=document.getElementsByClassName('dir')[document.getElementsByClassName('dir').length-1]
     dir.innerHTML=(currentdirectory.length>0) ? currentdirectory[currentdirectory.length-1]:"root"
    function setscroll(){ 
     document.getElementById("texts").scrollTop=10000000}
@@ -201,13 +223,15 @@ function runcommand(){
 //ls
 function lis(x,he=false){
     if (he){return "Lists all files in directory"}
-    var current=cwd()
+    let current=cwd()
     
 
-    var final=[]
-    for (var key in current){
+    console.log(current)
+    let final=[]
+    for (let key in current){
+	    console.log(key)
         if (current[key].constructor == Object){
-            final.push('<span style="color:white">'.concat(key,'</span>'))
+            final.unshift('<span style="color:white">'.concat(key,'</span>'))
         }else{final.push(key)};
     }
     return final.join('<br>')
@@ -216,9 +240,9 @@ function lis(x,he=false){
 //help
 function h(x,he=false){
     if (he){return "Shows list commands"}
-    var final='<table><tr><th>Command</th><th>Desc</th></tr>'
+    let final='<table><tr><th>Command</th><th>Desc</th></tr>'
 
-    for (var keys in commands){
+    for (let keys in commands){
         final=final.concat('<tr><td>',keys,'</td><td>',commands[keys]('',true),'</td></tr>')
     }
     return  final.concat('</table>')
@@ -234,7 +258,7 @@ function cd(x,he=false){
 }
 function cd2(y){
     
-    var current=cwd()
+    let current=cwd()
     let x = y.shift().replace(/[<]br[^>]*[>]/gi,"");
     if (x=='.'){}
     else if (x=='..'){
@@ -265,7 +289,7 @@ function cd2(y){
 //cat
 function ca(x,he=false){
     if (he){return "Outputs content of file. Usage: cat (filename with extension)"}
-    var current=cwd()
+    let current=cwd()
     res=''
     if (x in current){
         
@@ -273,20 +297,28 @@ function ca(x,he=false){
             let d=currentdirectory.join('/')
             res=''
             done=true
-            let path="".concat("/root/",d,(d!="")?'/':'',current[x])
+	    let loc=(window.location.pathname)
+	    let path=loc.substring(0, loc.lastIndexOf('/'));
+            path+="".concat("/root/",d,(d!="")?'/':'',current[x])
             
-            var xhr = new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
             xhr.open("GET", path, false);
             xhr.onload = function (e) {
                 if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     responset=(xhr.responseText);
                 } else {
+<<<<<<< HEAD
                     console.log(xhr.statusText);
                     responset="<span style='color:red;'>Error Please contact person in charge</span>"
+=======
+			responset="<span style='color:red'> Error in requesting file</span>"
+                    console.error(xhr.statusText);
+>>>>>>> 8aa14dda26e8ae448d9427480f336e34867643cc
                 }
                 }
             };
+	    xhr.setRequestHeader("Access-Control-Allow-Origin","*")
             xhr.send(null); 
             res=responset;
             return res

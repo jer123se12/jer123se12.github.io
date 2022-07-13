@@ -1,0 +1,57 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<div id="education"style="display: flex;flex-direction: column">
+
+</div>
+<style>
+.item{
+margin-top:20px;
+margin-bottom:20px;
+display:flex;
+flex-direction:column;
+}
+img {color:#ff0000;
+display: block;}
+</style>
+
+<style onload='
+
+let data=[
+[
+	"Maris Stella High School Primary",
+	"https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/SGP_Maris_Stella_High_School_Crest.svg/480px-SGP_Maris_Stella_High_School_Crest.svg.png",
+	"",
+	2013,
+	2018
+],
+[
+	"School of Science And Technology Singapore",
+	"https://upload.wikimedia.org/wikipedia/commons/e/eb/School_of_Science_and_Technology%2C_Singapore_logo.png",
+	"",
+	2019,
+        2022
+] 
+
+
+];
+let template=(name,img,desc,ystart,yend)=>{return `
+<div class="item">
+<img style="object-fit: contain;width: auto;height: 10vh;" src="${img}" alt="IMG DID NOT LOAD PLEASE SEND HELP">
+		<p><b>${name}</b></p>
+		<p style="color:red">${ystart}-${yend}</p>
+		<p>${desc}</p>
+</div>`};
+
+let divider ="<div style=\"background-color:grey;width:10vw;height:.5vh;\"></div>";
+let text="";
+let ele=document.getElementById("education");
+for(let i=0;i<data.length-1;i++){
+    console.log("sldjkhfs")
+	text+=template(data[i][0],data[i][1],data[i][2],data[i][3],data[i][4]);
+	text+=divider;
+};
+
+text+=template(data[data.length-1][0],data[data.length-1][1],data[data.length-1][2],data[data.length-1][3],data[data.length-1][4]);
+ele.innerHTML =text'>
+</style>
