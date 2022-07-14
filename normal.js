@@ -56,6 +56,7 @@ function getfile(currentdirectory,filename){
 	let loc=(window.location.pathname)
 	let path=loc.substring(0, loc.lastIndexOf('/'));
 	path+="".concat("/",d,(d!="")?'/':'',filename)
+	console.log(path)
 
 	console.log(path)
 	console.log(currentdirectory)
