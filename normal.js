@@ -1,16 +1,30 @@
 let filesystem={
-"projects": {
-	"3d+electornics": {
-		"myKb.md": "mykeyboard.html"
-	}, "programming": {
-		"thisWebsite.md": "this_website.html",
-		"tetris.md": "TeTrIs.html",
-		"homepage.md":"homepage.html"
+	"projects": {
+		"3D+electornics": {
+			"myKb.md": "mykeyboard.html"
+		}, "programming": {
+			"thisWebsite.md": "this_website.html",
+			"tetris.md": "TeTrIs.html",
+			"homepage.md":"homepage.html"
+		}
+	}, 
+	"education.md": "education.html",
+	"skills": {
+		"proficient.md": "proficient.html", "learning.md": "learning.html"
+	},
+	"aboutMe.md": "aboutme.html",
+	"certificates": {
+		"programming": {
+			"NSC_2021.md": "NSC2021.html"
+		}, "science": {
+			"ISIF_2021.md": "ISIF2021.html"
+		},
+		"cybersecurity": {
+			"hackNFlag_2021.md": "Hack-n-Flag2021.html",
+			"YCEP_CTF_2021.md": "YCEP-CTF2021.html"
+		}
 	}
-}, 
-"education.md": "education.html",
-"skills": {
-	"Proficient.md": "proficient.html", "learning.md": "learning.html"}, "aboutMe.md": "aboutme.html", "certificates": {"programming": {"NSC_2021.md": "NSC2021.html"}, "science": {"ISIS_2021.md": "ISIF2021.html"}, "cybersecurity": {"hackNFlag_2021.md": "Hack-n-Flag2021.html", "YCEP_CTF_2021.md": "YCEP-CTF2021.html"}}}
+}
 function load(){
 	document.body.innerHTML=getstuff({"root":filesystem})
 
@@ -22,10 +36,10 @@ function getstuff(directory,cwd=[],depth=0){
 	console.log(directory)
 	for (const fn in directory){
 		console.log(fn)
-		output+=`<div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')">
-			<h${depth+1}>${fn}</h${depth+1}>
-			</div>`
-		output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='border-left: 5px solid grey;display:none;margin-left:2rem;'>`
+		output+=`<div class="row"><div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')" style="width:fit-content">`+
+			`<span style='color:${(typeof directory[fn]==='string')?"#ff0000":"#00ff00"}'><h${depth+1}>${fn}</h${depth+1}></span>`+
+			`</div>`
+		output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='border-left: 5px solid #00ff00;display:none;margin-left:1rem;padding-left:1rem;border-radius: 20px 0px 0px 20px; height: fit-content; width: fit-content;'>`
 		if (typeof directory[fn]==='string'){
 			
 				output+=getfile(cwd,directory[fn])
@@ -33,7 +47,7 @@ function getstuff(directory,cwd=[],depth=0){
 		}else{
 			output+=getstuff(directory[fn],[...cwd,fn],depth+1)
 		}
-		output+="</div>"
+		output+="</div></div>"
 	}
 	console.log(output)
 	return output
