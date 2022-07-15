@@ -322,13 +322,11 @@ function ca(x,he=false){
                 if (xhr.status === 200) {
                     responset=(xhr.responseText);
                 } else {
-<<<<<<< HEAD
+
                     console.log(xhr.statusText);
                     responset="<span style='color:red;'>Error Please contact person in charge</span>"
-=======
-			responset="<span style='color:red'> Error in requesting file</span>"
-                    console.error(xhr.statusText);
->>>>>>> 8aa14dda26e8ae448d9427480f336e34867643cc
+
+
                 }
                 }
             };
