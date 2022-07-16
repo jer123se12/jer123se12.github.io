@@ -314,7 +314,7 @@ function ca(x,he=false){
 	    let loc=(window.location.pathname)
 	    let path=loc.substring(0, loc.lastIndexOf('/'));
             path+="".concat("/root/",d,(d!="")?'/':'',current[x])
-            
+            console.log(path)
             let xhr = new XMLHttpRequest();
             xhr.open("GET", path, false);
             xhr.onload = function (e) {
