@@ -8,33 +8,6 @@ let responset;
 let done;
 let history=[];
 let hi=0;
-let filesystem={
-	"projects": {
-		"3d+electornics": {
-			"myKb.md": "mykeyboard.html"
-		}, "programming": {
-			"thisWebsite.md": "this_website.html",
-			"tetris.md": "TeTrIs.html",
-			"homepage.md":"homepage.html"
-		}
-	}, 
-	"education.md": "education.html",
-	"skills": {
-		"proficient.md": "proficient.html", "learning.md": "learning.html"
-	},
-	"aboutMe.md": "aboutme.html",
-	"certificates": {
-		"programming": {
-			"NSC_2021.md": "NSC2021.html"
-		}, "science": {
-			"ISIF_2021.md": "ISIF2021.html"
-		},
-		"cybersecurity": {
-			"hackNFlag_2021.md": "Hack-n-Flag2021.html",
-			"YCEP_CTF_2021.md": "YCEP-CTF2021.html"
-		}
-	}
-}
 //list of commands avaliable
 let commands={
     'ls':lis,
