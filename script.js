@@ -10,7 +10,7 @@ let history=[];
 let hi=0;
 let filesystem={
 	"projects": {
-		"3D+electornics": {
+		"3d+electornics": {
 			"myKb.md": "mykeyboard.html"
 		}, "programming": {
 			"thisWebsite.md": "this_website.html",
