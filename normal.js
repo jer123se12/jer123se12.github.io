@@ -10,7 +10,7 @@ function getstuff(directory,cwd=[],depth=0){
 	console.log(directory)
 	for (const fn in directory){
 		console.log(fn)
-		output+=`<div class="row"><div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')" style="width:fit-content">`+
+		output+=`<div class="col"><div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')" style="width:fit-content">`+
 			`<span style='color:${(typeof directory[fn]==='string')?"#ff0000":"#00ff00"}'><h${depth+1}>${fn}</h${depth+1}></span>`+
 			`</div>`
 		output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='border-left: 5px solid #00ff00;display:none;margin-left:1rem;padding-left:1rem;border-radius: 20px 0px 0px 20px; height: fit-content; width: fit-content;'>`
