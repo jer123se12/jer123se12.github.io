@@ -10,10 +10,20 @@ function getstuff(directory,cwd=[],depth=0){
 	console.log(directory)
 	for (const fn in directory){
 		console.log(fn)
-		output+=`<div class="col"><div class="header"  onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')" style="width:fit-content;max-width:80ch">`+
-			`<span style='color:${(typeof directory[fn]==='string')?"#ff0000":"#00ff00"}'><h${depth+1}>${fn}</h${depth+1}></span>`+
-			`</div>`
-		output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='border-left: 5px solid #00ff00;display:none;margin-left:1rem;padding-left:1rem; height: fit-content; width: fit-content;'>`
+		output+=`<div class="row">
+				<div 	class="header"  
+					style="width:100vw;max-width:80ch"
+				>`+
+			`<div 
+				style="width:fit-content;height:fit-content"
+				onclick="toggle('${cwd[cwd.length-1]}${fn}${depth+1}')"
+				onmouseenter="this.style.cursor='pointer'"
+				onmouseexit="this.style.cursor='default'"
+			>
+				<span 
+					style='color:${(typeof directory[fn]==='string')?"#ff0000":"#00ff00"}'><h${depth+1}>${fn}</h${depth+1}></span>`+
+			`</div></div>`
+		output+=`<div id='${cwd[cwd.length-1]}${fn}${depth+1}'style='border-left: 2px solid #00ff00;display:none;margin-left:1rem; height: fit-content; width: 100vw; max-width:80ch;'>`
 		if (typeof directory[fn]==='string'){
 			
 				output+=getfile(cwd,directory[fn])

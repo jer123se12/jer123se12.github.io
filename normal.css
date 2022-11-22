@@ -12,8 +12,15 @@ align-items: center;
 }
 .row{display: flex;
     justify-content: center;
-    align-items: center;}
+    align-items: left;
+flex-direction: column;
+}
 
 a{
     color:greenyellow;
+}
+.col{
+display:flex;
+justify-content: left;
+flex-direction: column
 }
