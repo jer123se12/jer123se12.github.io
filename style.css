@@ -1,0 +1,170 @@
+body{
+
+	font-family: "Ubuntu", serif;
+	font-weight: 300;
+	font-style: normal;
+}
+#name{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	color:#00ff00;
+	text-align:center;
+	max-width:fit-content;
+	margin:auto;
+} 
+.font2{
+font-family: "Yellowtail", serif;
+	font-weight: 400;
+	font-style: normal;
+}
+#title{
+	font-size:5rem;
+	
+}
+#subTitle{
+	font-family: "Ubuntu", serif;
+	font-weight: 300;
+	font-style: normal;
+	color:#867979;
+	font-size:1.5rem;
+	animation-name: subtitle;
+	animation-duration: 1s;
+}
+@keyframes subtitle{
+	from{
+		opacity:0;
+		transform: translate(0,-100%);	
+	}
+	to{
+		opacity:1;
+		transform:translate(0,0);
+	}
+}
+.cross{
+	animation-timing-function:ease;
+	z-index:-1;
+	position: absolute;
+	top:-50%;
+	left:-70%;
+	width:10rem;
+	height:auto;
+	animation-name: cross;
+	animation-duration: 0.5s;
+	transform: rotate(70deg);
+	opacity:1;	
+	animation-fill-mode: both;
+}
+#cross1{
+	top:-50%;
+	left:-70%;
+	width:7rem;
+	transform: rotate(70deg);
+}
+#cross2{
+	top:70%;
+	left:-30%;
+	width:3rem;
+	transform: rotate(10deg);
+	animation-delay:0.1s;
+}
+#cross3{
+	top:0%;
+	left:100%;
+	width:2rem;
+	transform: rotate(-650deg);
+	animation-delay:0.2s;
+}
+#cross4{
+	top:70%;
+	left:130%;
+	width:6rem;
+	transform: rotate(-610deg);
+	animation-delay:0.3s;
+}
+#cross5{
+	top:0%;
+	left:0%;
+	width:4rem;
+	transform: rotate(-45deg);
+	animation-delay:0.2s;
+}
+#cross6{
+	top:-10%;
+	left:120%;
+	width:4rem;
+	transform: rotate(-45deg);
+	animation-delay:0.2s;
+}
+#sp{
+	top:40%;
+	left:70%;
+	font-weight:bold;
+	color:#E7E4E4;
+	font-size:2rem;
+	transform:rotate(10deg);
+	
+}
+@keyframes cross{
+	0%{
+		top:50%;
+		left:50%;
+		opacity:0;
+		transform: rotate(-360deg);
+	}
+}
+
+
+
+
+
+#landingPage{
+	margin:0;
+	height:100%;
+	background-repeat:repeat;
+	position: relative;
+	overflow: hidden;
+}
+.centered{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+#landingPage::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -1;
+  background:url("public/backgroundTile.png"), rgba(0,0,0,0.9);
+  background-blend-mode: darken;
+  transform: rotate(-30deg);
+}
+html, body {
+    margin: 0;
+    height: 100%;
+}
+#aboutMe{
+	margin-top:-10vh;
+	margin-bottom:0;
+	position:relative;
+	background-color:#000;
+	clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
+	height:100%;
+}
+#Me{
+color:white;
+}
+#pfp{
+	width:20vw;
+	height:auto:
+}
+#pfpCaption{
+	text-align:center;
+	font-size:1.5rem;
+	color:#0F0;
+}
