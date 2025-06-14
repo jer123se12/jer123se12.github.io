@@ -1,0 +1,31 @@
+
+.nunito-light {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.nunito-medium {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+body{
+    padding:0;
+    margin:0;
+    font-size:20px;
+    background: #5d5d5d;
+}
+
+.section{
+    margin:0;
+    padding:0;
+    height:100vh;
+    width:100vw;
+    background-position:center;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+}
