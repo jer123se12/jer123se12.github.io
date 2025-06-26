@@ -1,4 +1,19 @@
 
 #projects{
     background-image:url(/public/projects.png);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#projects .gList{
+    width:80%;
+    margin-top:10vh;
+    margin-bottom:10vh;
+    display:flex;
+    justify-content:space-around;
+}
+
+#projects .gList div{
+    width:fit-content;
 }

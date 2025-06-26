@@ -1,4 +1,38 @@
 
 #about{
     background-image:url(/public/about.png);
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
 }
+#about #pfp{
+    background-color:#000;
+    width:30vw;
+    height:30vw;
+    margin-right:20px;
+}
+#about #bigD{
+    display:flex;
+    flex-direction:row;
+}
+#about #about{
+    max-width:40ch;
+}    
+#about #inner{
+    font-weight:50;
+    font-size:7ch;
+    background-color:#aa3344;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 20px;
+    border-radius:30px;
+}
+#about #name{
+    background-color:#333;
+    width: fit-content;
+    height:fit-content;
+    padding: 5px;
+}
+
+
