@@ -5,10 +5,15 @@ const sections=[
 "experience",
 "achievements"]
 let nav;
+const randomAction=["BOING","CODING","DEVELOPING","DANCING","STUDYING"];
 function load(){
     nav=document.getElementsByTagName("nav")[0].getElementsByTagName("a")
 document.onscroll=scroll
     setCorrectTab()
+    setRandomAction()
+}
+function setRandomAction(){
+    document.getElementById("rac").innerText=randomAction[Math.floor(Math.random()*randomAction.length)];
 }
 function selectNav(position){
     for (let i=0;i<nav.length;i++){
@@ -25,14 +30,13 @@ function setCorrectTab(){
         for (let i=0;i<sections.length;i++){
             let section=document.getElementById(sections[i])
             let scroll=window.scrollY
-                +(window.innerHeight/2);
+            +1;
            if (section.offsetTop-scroll>0) {
                selectNav(i-1)
                selected=true;
                console.log("selected")
                break
            }
-           
         }
         if (!selected){
             selectNav(sections.length-1)

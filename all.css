@@ -1,4 +1,13 @@
-
+.title {
+    font-weight:50;
+    position:sticky;
+    top:5px;
+    left:5px;
+    color:white;
+    align-self:start;
+    font-size:2rem;
+    margin:0;
+}
 .nunito-light {
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
@@ -27,9 +36,51 @@ body{
     width:100vw;
 }
 .section{
+    display:flex;
+    flex-direction: column;
     background-position:center;
     background-size:contain;
     background-repeat:no-repeat;
     background-attachment: fixed;
     min-height:30vh;
 }
+.gList{
+    width:80%;
+    display:flex;
+    flex-wrap:wrap;
+    flex-grow:1;
+    justify-content:space-around;
+    color:white;
+    padding:10vh;
+    max-height:70vh;
+    overflow:hidden;
+    transition: max-height 0.5s ease-in-out;
+    margin-bottom:20px;
+}
+
+.gList a{
+    width:fit-content;
+    flex-basis:40%;
+    padding: 10px;
+    background-color:rgba(0,0,0,0);
+    transition:background-color 0.2s ease-in-out;
+}
+.gList img{
+    width:100%;
+    aspect-ratio:3/1.5;
+    background-size:cover;
+    border:0;
+}
+.gList a:hover p {
+
+}
+.gList a:hover{
+    cursor:pointer;
+    background-color:rgba(0,0,0,0.2);
+}
+.gList a p{
+    max-width:80ch;
+    color:white;
+    transition: color 0.2 ease-in-out;
+}
+

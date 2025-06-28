@@ -1,4 +1,10 @@
 
 #events{
     background-image:url(/public/events.png);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#events .gList img{
+    background-image:url('/public/eventstmp.png');
 }

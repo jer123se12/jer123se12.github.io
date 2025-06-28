@@ -9,25 +9,30 @@ nav{
     color:white;
 }
 nav a{
+    font-weight:100;
     color:#fff;
     text-decoration:none;
-
+    background-color:rgba(0,0,0,0);
     display:flex;
     flex-direction:column;
     padding:5px 7px;
     align-items:center;
+    transition: all 0.2s ease-in-out;
+}
+nav a:hover{
+    color:#000;
 }
 nav p{
     padding:0 0;
 }
 nav .selected{
-    background:#F6AB1F;
+    background-color:#F6AB1F;
 }
 nav .selected div{
     display: flex;
     height:10px;
     width:10px;
-    background:#FFF;
+    background-color:#FFF;
     border-radius:50%;
     position:relative;
 }
